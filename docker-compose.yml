@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  user-service:
+    build:
+      context: ./UserService
+    container_name: user-service
+    ports:
+      - "5001:80"
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+
+  account-service:
+    build:
+      context: ./AccountService
+    container_name: account-service
+    ports:
+      - "5002:80"
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+
+  transaction-service:
+    build:
+      context: ./TransactionService
+    container_name: transaction-service
+    ports:
+      - "5003:80"
+    depends_on:
+      - account-service
+      - ledger-service
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+
+  ledger-service:
+    build:
+      context: ./LedgerService
+    container_name: ledger-service
+    ports:
+      - "5004:80"
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: darko
+    ports:
+      - "5433:5432"
