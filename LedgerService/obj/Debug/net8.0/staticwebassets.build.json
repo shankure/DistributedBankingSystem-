@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "KLI3FzxmQw4J3DJsyNm4sPiWTKamXjePfMkSpImjzMA=",
+  "Source": "LedgerService",
+  "BasePath": "_content/LedgerService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
