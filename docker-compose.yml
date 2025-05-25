@@ -1,14 +1,17 @@
 version: '3.9'
 
 services:
+
   user-service:
     build:
       context: ./UserService
     container_name: user-service
     ports:
       - "5001:80"
+    depends_on:
+      - user-postgres
     environment:
-    - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Development
 
   account-service:
     build:
@@ -16,8 +19,10 @@ services:
     container_name: account-service
     ports:
       - "5002:80"
+    depends_on:
+      - account-postgres
     environment:
-    - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Development
 
   transaction-service:
     build:
@@ -29,7 +34,7 @@ services:
       - account-service
       - ledger-service
     environment:
-    - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Development
 
   ledger-service:
     build:
@@ -37,14 +42,65 @@ services:
     container_name: ledger-service
     ports:
       - "5004:80"
+    depends_on:
+      - ledger-postgres
     environment:
-    - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Development
 
-  postgres:
+  # PostgreSQL for UserService
+  user-postgres:
     image: postgres
-    container_name: postgres
+    container_name: user-postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: darko
+      POSTGRES_DB: userdb
     ports:
       - "5433:5432"
+    volumes:
+      - user_pgdata:/var/lib/postgresql/data
+
+  # PostgreSQL for AccountService
+  account-postgres:
+    image: postgres
+    container_name: account-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: darko
+      POSTGRES_DB: accountdb
+    ports:
+      - "5434:5432"
+    volumes:
+      - account_pgdata:/var/lib/postgresql/data
+
+  # PostgreSQL for LedgerService
+  ledger-postgres:
+    image: postgres
+    container_name: ledger-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: darko
+      POSTGRES_DB: ledgerdb
+    ports:
+      - "5435:5432"
+    volumes:
+      - ledger_pgdata:/var/lib/postgresql/data
+
+  # PostGreSQL for TransactionService
+  transaction-postgres:
+    image: postgres
+    container_name: transaction-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: darko
+      POSTGRES_DB: transactiondb
+    ports:
+      - "5436:5432"
+    volumes:
+      - transaction_pgdata:/var/lib/postgresql/data
+
+volumes:
+  user_pgdata:
+  account_pgdata:
+  ledger_pgdata:
+  transaction_pgdata:

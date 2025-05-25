@@ -1,4 +1,4 @@
-﻿namespace TransactionService.DTOs
+﻿namespace TransactionService.Dtos
 {
     public class LedgerEntryDto
     {
