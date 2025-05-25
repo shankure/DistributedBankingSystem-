@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\accountservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\accountservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\accountservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\accountservice\\controllers\\bankaccountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|solutionrelative:controllers\\bankaccountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\accountservice\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -18,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,29 +38,52 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAgwFIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T20:59:31.184Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAArAAAAAAAAAA==",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-23T15:06:47.884Z",
+              "WhenOpened": "2025-05-24T20:59:08.914Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "BankAccountsController.cs",
+              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Controllers\\BankAccountsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BankAccountsController.cs",
+              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Controllers\\BankAccountsController.cs",
+              "RelativeToolTip": "Controllers\\BankAccountsController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAawBIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T20:30:38.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Dockerfile",
               "RelativeDocumentMoniker": "Dockerfile",
               "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Dockerfile",
               "RelativeToolTip": "Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-23T14:50:00.711Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-24T11:50:15.903Z"
             }
           ]
         }

@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LedgerService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b3c9187e30444bd42b3bb3bb8a83ee246687fed")]
 [assembly: System.Reflection.AssemblyProductAttribute("LedgerService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LedgerService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

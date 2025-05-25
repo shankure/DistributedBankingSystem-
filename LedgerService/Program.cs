@@ -19,6 +19,11 @@ builder.WebHost.ConfigureKestrel(options =>
     options.ListenAnyIP(80); // Force it to listen on port 80 for Docker
 });
 
+builder.Services.AddHttpClient("AccountService", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["Services:AccountServiceUrl"]);
+});
+
 var app = builder.Build();
 
 app.UseSwagger();

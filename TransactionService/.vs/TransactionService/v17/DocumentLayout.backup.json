@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\TransactionService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9B599EF3-B9BA-47CC-A52C-663603D59B0D}|TransactionService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\transactionservice\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{9B599EF3-B9BA-47CC-A52C-663603D59B0D}|TransactionService.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9B599EF3-B9BA-47CC-A52C-663603D59B0D}|TransactionService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\transactionservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{9B599EF3-B9BA-47CC-A52C-663603D59B0D}|TransactionService.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
@@ -18,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,27 +26,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\TransactionService\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\TransactionService\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-23T14:51:28.628Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\TransactionService\\Dockerfile",
-              "RelativeDocumentMoniker": "Dockerfile",
-              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\TransactionService\\Dockerfile",
-              "RelativeToolTip": "Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-23T14:51:14.94Z",
+              "WhenOpened": "2025-05-24T22:00:03.961Z",
               "EditorCaption": ""
             }
           ]

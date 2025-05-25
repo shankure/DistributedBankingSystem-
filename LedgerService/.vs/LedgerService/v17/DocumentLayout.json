@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\ledgerservice\\controllers\\ledgercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|solutionrelative:controllers\\ledgercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\ledgerservice\\dtos\\balanceupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|solutionrelative:dtos\\balanceupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\ledgerservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\ledgerservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\ledgerservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\ledgerservice\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{6D2B9CD9-CD48-451D-A46C-5F82C332D23A}|LedgerService.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,41 +38,53 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BalanceUpdateDto.cs",
+              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Dtos\\BalanceUpdateDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\BalanceUpdateDto.cs",
+              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Dtos\\BalanceUpdateDto.cs",
+              "RelativeToolTip": "Dtos\\BalanceUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T09:30:48.607Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "LedgerController.cs",
+              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Controllers\\LedgerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LedgerController.cs",
+              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Controllers\\LedgerController.cs",
+              "RelativeToolTip": "Controllers\\LedgerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T09:04:32.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T15:13:44.396Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-23T15:05:45.99Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-25T09:03:04.707Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Dockerfile",
-              "RelativeDocumentMoniker": "Dockerfile",
-              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\Dockerfile",
-              "RelativeToolTip": "Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-23T15:00:52.471Z"
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\LedgerService\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-24T21:21:46.467Z"
             }
           ]
         }

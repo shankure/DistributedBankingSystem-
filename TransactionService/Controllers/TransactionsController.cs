@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using TransactionService.Data;
+using TransactionService.Dtos;
 using TransactionService.Models;
-using TransactionService.DTOs;
 
 namespace TransactionService.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class TransactionsController : ControllerBase
@@ -22,15 +25,27 @@ public class TransactionsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> ProcessTransaction(TransactionRecord transaction)
+    public async Task<IActionResult> ProcessTransaction([FromBody] CreateTransactionDto dto)
     {
-        transaction.Id = Guid.NewGuid();
-        transaction.Timestamp = DateTime.UtcNow;
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+            return Unauthorized("Missing user ID in token.");
+
+        // Create and save transaction
+        var transaction = new TransactionRecord
+        {
+            Id = Guid.NewGuid(),
+            FromAccountId = dto.FromAccountId,
+            ToAccountId = dto.ToAccountId,
+            Amount = dto.Amount,
+            Type = dto.Type,
+            Timestamp = DateTime.UtcNow
+        };
 
         _context.Transactions.Add(transaction);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
-        // STEP 1: Send to LedgerService
+        // Step 1: Log to LedgerService
         var ledgerEntry = new LedgerEntryDto
         {
             TransactionId = transaction.Id,
@@ -55,9 +70,31 @@ public class TransactionsController : ControllerBase
             return StatusCode(500, $"Failed to log transaction to LedgerService: {ex.Message}");
         }
 
-        return CreatedAtAction(nameof(GetAll), new { id = transaction.Id }, transaction);
+        // Return confirmation
+        return Ok(new TransactionDto
+        {
+            Id = transaction.Id,
+            FromAccountId = transaction.FromAccountId,
+            ToAccountId = transaction.ToAccountId,
+            Amount = transaction.Amount,
+            Type = transaction.Type,
+            Timestamp = transaction.Timestamp
+        });
     }
 
     [HttpGet]
-    public IActionResult GetAll() => Ok(_context.Transactions.ToList());
+    public IActionResult GetAll()
+    {
+        var result = _context.Transactions.Select(t => new TransactionDto
+        {
+            Id = t.Id,
+            FromAccountId = t.FromAccountId,
+            ToAccountId = t.ToAccountId,
+            Amount = t.Amount,
+            Type = t.Type,
+            Timestamp = t.Timestamp
+        }).ToList();
+
+        return Ok(result);
+    }
 }
