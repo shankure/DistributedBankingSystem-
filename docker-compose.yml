@@ -12,6 +12,10 @@ services:
       - user-postgres
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Jwt__Key=${JWT_SECRET}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - Jwt__Audience=${JWT_AUDIENCE}
+      - ConnectionStrings__DefaultConnection=${USER_DB_CONNECTION}
 
   account-service:
     build:
@@ -23,6 +27,10 @@ services:
       - account-postgres
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Jwt__Key=${JWT_SECRET}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - Jwt__Audience=${JWT_AUDIENCE}
+      - ConnectionStrings__DefaultConnection=${ACCOUNT_DB_CONNECTION}
 
   transaction-service:
     build:
@@ -35,6 +43,12 @@ services:
       - ledger-service
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Jwt__Key=${JWT_SECRET}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - Jwt__Audience=${JWT_AUDIENCE}
+      - ConnectionStrings__DefaultConnection=${TRANSACTION_DB_CONNECTION}
+      - Services__AccountServiceUrl=${ACCOUNT_SERVICE_URL}
+      - Services__LedgerServiceUrl=${LEDGER_SERVICE_URL}
 
   ledger-service:
     build:
@@ -46,6 +60,11 @@ services:
       - ledger-postgres
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Jwt__Key=${JWT_SECRET}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - Jwt__Audience=${JWT_AUDIENCE}
+      - ConnectionStrings__DefaultConnection=${LEDGER_DB_CONNECTION}
+      - Services__AccountServiceUrl=${ACCOUNT_SERVICE_URL}
 
   # PostgreSQL for UserService
   user-postgres:
