@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\accountservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\accountservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\accountservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A86E290-3F6E-4C15-B478-0E060378ACD4}|AccountService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\accountservice\\controllers\\bankaccountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,27 +38,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAgwFIAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T20:59:31.184Z"
+              "WhenOpened": "2025-05-25T11:19:52.192Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-24T20:59:08.914Z",
+              "WhenOpened": "2025-05-25T11:19:17.465Z",
               "EditorCaption": ""
             },
             {
@@ -69,9 +70,10 @@
               "RelativeDocumentMoniker": "Controllers\\BankAccountsController.cs",
               "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\AccountService\\Controllers\\BankAccountsController.cs",
               "RelativeToolTip": "Controllers\\BankAccountsController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAawBIAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAkwGgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T20:30:38.421Z"
+              "WhenOpened": "2025-05-24T20:30:38.421Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

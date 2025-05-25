@@ -1,27 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 using TransactionService.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// === Load configuration sources ===
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddUserSecrets<Program>(optional: true)
+    .AddEnvironmentVariables();
 
+// === Services ===
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddHttpClient(); // Needed for calling other services
 
-//postgres
+// PostgreSQL connection
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<TransactionDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
-// JWT
-var config = builder.Configuration;
-var key = Encoding.UTF8.GetBytes(config["Jwt:Key"]!);
+// JWT Authentication
+var jwtKey = builder.Configuration["Jwt:Key"];
+var issuer = builder.Configuration["Jwt:Issuer"];
+var audience = builder.Configuration["Jwt:Audience"];
 
+var keyBytes = Encoding.UTF8.GetBytes(jwtKey!);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -31,11 +38,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = config["Jwt:Issuer"],
-            ValidAudience = config["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(key)
+            ValidIssuer = issuer,
+            ValidAudience = audience,
+            IssuerSigningKey = new SymmetricSecurityKey(keyBytes)
         };
 
+        // Logging auth flow (optional)
         options.Events = new JwtBearerEvents
         {
             OnMessageReceived = context =>
@@ -51,7 +59,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             },
             OnTokenValidated = context =>
             {
-                Console.WriteLine($"✅ AUTH SUCCESS: {context.Principal.Identity?.Name}");
+                Console.WriteLine($"✅ AUTH SUCCESS: {context.Principal?.Identity?.Name}");
                 return Task.CompletedTask;
             }
         };
@@ -59,27 +67,28 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
+// Swagger with JWT support
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "TransactionService", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TransactionService", Version = "v1" });
 
-    c.AddSecurityDefinition("Bearer", new()
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme.",
         Name = "Authorization",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer"
     });
 
-    c.AddSecurityRequirement(new()
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
-            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            new OpenApiSecurityScheme
             {
-                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                Reference = new OpenApiReference
                 {
-                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
                 }
             },
@@ -88,14 +97,18 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// Register HttpClient for inter-service communication
+builder.Services.AddHttpClient();
+
+// Docker port override
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenAnyIP(80); // Force it to listen on port 80 for Docker
+    options.ListenAnyIP(80);
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// === Middleware Pipeline ===
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -103,7 +116,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
