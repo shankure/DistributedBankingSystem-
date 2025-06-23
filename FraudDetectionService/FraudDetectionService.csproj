@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-FraudDetectionService-1ab135a2-492f-4a58-9d35-99fd317d93e1</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="MassTransit" Version="8.0.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Prevents TransactionService content (e.g., configs) from being included in publish -->
+    <ProjectReference Include="..\Shared.Messages\Shared.Messages.csproj" />
+    <ProjectReference Include="..\TransactionAbstractions\TransactionAbstractions.csproj" />
+  </ItemGroup>
+
+  <!-- Optional: Globally exclude copying of appsettings from FraudDetectionService if needed -->
+  <ItemGroup>
+    <None Update="appsettings*.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -28,3 +28,6 @@ README.md
 !.git/config
 !.git/packed-refs
 !.git/refs/heads/**
+# Ignore appsettings files to avoid conflicts
+appsettings.json
+appsettings.Development.json

@@ -17,12 +17,12 @@ namespace TransactionService.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.5")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("TransactionService.Models.TransactionRecord", b =>
+            modelBuilder.Entity("TransactionAbstractions.Models.TransactionRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,6 +33,9 @@ namespace TransactionService.Migrations
 
                     b.Property<Guid>("FromAccountId")
                         .HasColumnType("uuid");
+
+                    b.Property<bool>("IsBlocked")
+                        .HasColumnType("boolean");
 
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("timestamp with time zone");

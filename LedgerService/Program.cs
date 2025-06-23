@@ -1,4 +1,6 @@
+using LedgerService.Consumers;
 using LedgerService.Data;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -39,6 +41,22 @@ builder.WebHost.ConfigureKestrel(options =>
     options.ListenAnyIP(80);
 });
 
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<TransactionCreatedConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("rabbitmq", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+
+        cfg.ConfigureEndpoints(context);
+    });
+});
 var app = builder.Build();
 
 // === Middleware Pipeline ===

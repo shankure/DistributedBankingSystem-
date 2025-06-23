@@ -7,6 +7,8 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using LedgerService.Dtos;
+using MassTransit;
+using Shared.Messages;
 
 namespace LedgerService.Controllers;
 
@@ -16,11 +18,13 @@ public class LedgerController : ControllerBase
 {
     private readonly LedgerDbContext _context;
     private readonly IHttpClientFactory _httpClientFactory;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public LedgerController(LedgerDbContext context, IHttpClientFactory httpClientFactory)
+    public LedgerController(LedgerDbContext context, IHttpClientFactory httpClientFactory, IPublishEndpoint publishEndpoint)
     {
         _context = context;
         _httpClientFactory = httpClientFactory;
+        _publishEndpoint = publishEndpoint;
     }
 
     [HttpGet]
@@ -36,41 +40,8 @@ public class LedgerController : ControllerBase
         _context.LedgerEntries.Add(entry);
         _context.SaveChanges();
 
-        // Send updates to AccountService
-        var httpClient = _httpClientFactory.CreateClient("AccountService");
-
-        var updates = new List<BalanceUpdateDto>();
-
-        if (entry.FromAccountId != null)
-        {
-            // Subtract from sender
-            updates.Add(new BalanceUpdateDto
-            {
-                AccountId = entry.FromAccountId.Value,
-                Amount = -entry.Amount
-            });
-        }
-
-        if (entry.ToAccountId != null)
-        {
-            // Add to receiver
-            updates.Add(new BalanceUpdateDto
-            {
-                AccountId = entry.ToAccountId.Value,
-                Amount = entry.Amount
-            });
-        }
-
-        foreach (var update in updates)
-        {
-            var json = JsonSerializer.Serialize(update);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await httpClient.PostAsync("http://account-service/api/bankaccounts/update-balance", content);
-            response.EnsureSuccessStatusCode(); // will throw if failed
-        }
-
         return CreatedAtAction(nameof(GetAllEntries), new { id = entry.Id }, entry);
     }
+
 
 }

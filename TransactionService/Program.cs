@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using TransactionService.Consumers;
 using TransactionService.Data;
+using TransactionService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +20,7 @@ builder.Configuration
 // === Services ===
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddScoped<ITransactionService, TransactionService.TransactionService>();
 
 // PostgreSQL connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -99,6 +103,41 @@ builder.Services.AddSwaggerGen(c =>
 
 // Register HttpClient for inter-service communication
 builder.Services.AddHttpClient();
+
+// === MassTransit with RabbitMQ ===
+builder.Services.AddMassTransit(x =>
+{
+    // Register your consumer properly
+    x.AddConsumer<TransactionCreatedConsumer>();
+    x.AddConsumer<FraudAlertConsumer>();
+    x.AddConsumers(typeof(TransactionCreatedConsumer).Assembly);
+
+    // Optional: Naming convention for queues
+    x.SetKebabCaseEndpointNameFormatter();
+
+    // Transport setup
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("rabbitmq", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        // Bind TransactionCreatedConsumer to transaction-created-queue
+        cfg.ReceiveEndpoint("transaction-created-queue", e =>
+        {
+            e.ConfigureConsumer<TransactionCreatedConsumer>(context);
+        });
+
+        // Bind FraudAlertConsumer to fraudulent-transactions
+        cfg.ReceiveEndpoint("fraudulent-transactions", e =>
+        {
+            e.ConfigureConsumer<FraudAlertConsumer>(context);
+        });
+    });
+});
+
 
 // Docker port override
 builder.WebHost.ConfigureKestrel(options =>

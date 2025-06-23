@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "pCTdE+TaEpXkFpE4XQ8hcoe3rhu7OWXhanExBJVXe1Y=",
+  "Hash": "zm4Jfk0tvzRZIJsIYE8EHuJtS9e3473V13rKnF4l0Ys=",
   "Source": "TransactionService",
   "BasePath": "_content/TransactionService",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }

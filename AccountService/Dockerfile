@@ -7,15 +7,22 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy only the project file to restore packages
-COPY AccountService.csproj ./
-RUN dotnet restore
+# Copy only the project files and NuGet.Config for restoring packages
+COPY AccountService/AccountService.csproj AccountService/
+COPY Shared.Messages/Shared.Messages.csproj Shared.Messages/
+COPY AccountService/NuGet.Config AccountService/
 
-# Copy everything else and build the app
-COPY . .
-RUN dotnet publish -c Release -r linux-x64 --self-contained false -o /app/publish
+# Restore dependencies
+RUN dotnet restore AccountService/AccountService.csproj
 
-# Final image with just the published output
+# Copy source files
+COPY AccountService/ AccountService/
+COPY Shared.Messages/ Shared.Messages/
+
+# Publish the project
+RUN dotnet publish AccountService/AccountService.csproj -c Release -r linux-x64 --self-contained false -o /app/publish
+
+# Final runtime image
 FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .

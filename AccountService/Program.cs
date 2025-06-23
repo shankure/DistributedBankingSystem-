@@ -1,4 +1,7 @@
-﻿using AccountService.Data;
+﻿using AccountService.Consumers;
+using AccountService.Data;
+using AccountService.Services;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -17,6 +20,8 @@ builder.Configuration
 // === Services ===
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddScoped<IAccountService, AccountService.Services.AccountService>();
+
 
 // === Swagger with JWT support ===
 builder.Services.AddSwaggerGen(options =>
@@ -81,6 +86,28 @@ builder.WebHost.ConfigureKestrel(options =>
     options.ListenAnyIP(80);
 });
 
+builder.Services.AddMassTransit(x =>
+{
+    // Register your consumer
+    x.AddConsumer<TransactionCreatedConsumer>();
+
+    // Configure RabbitMQ
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("rabbitmq", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        // Bind consumer to a queue
+        cfg.ReceiveEndpoint("transaction-created-queue", e =>
+        {
+            e.ConfigureConsumer<TransactionCreatedConsumer>(context);
+        });
+    });
+});
+
 var app = builder.Build();
 
 // === Middleware ===
@@ -92,7 +119,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); // <-- Required before Authorization
+app.UseAuthentication(); // Required before Authorization
 app.UseAuthorization();
 
 app.MapControllers();

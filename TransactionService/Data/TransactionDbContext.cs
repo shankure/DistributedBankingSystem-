@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TransactionService.Models;
+using TransactionAbstractions.Models;
 
 namespace TransactionService.Data
 {

@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\UserService\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B73350D3-1D0C-400F-837F-D58CE09C40E1}|UserService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\userservice\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B73350D3-1D0C-400F-837F-D58CE09C40E1}|UserService.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B73350D3-1D0C-400F-837F-D58CE09C40E1}|UserService.csproj|c:\\users\\darko\\desktop\\distributed systems\\distributedbankingsystem\\userservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B73350D3-1D0C-400F-837F-D58CE09C40E1}|UserService.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -31,19 +35,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\UserService\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\UserService\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAYwD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T11:38:42.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\UserService\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\UserService\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACYAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-25T11:18:09.132Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\UserService\\Dockerfile",
               "RelativeDocumentMoniker": "Dockerfile",
@@ -51,8 +68,7 @@
               "RelativeToolTip": "Dockerfile",
               "ViewState": "AgIAAAEAAAAAMzMzMzP7vwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-05-24T21:55:12.039Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-24T21:55:12.039Z"
             }
           ]
         }

@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
+using MassTransit;
 using System.Security.Claims;
-using System.Text;
-using System.Text.Json;
 using TransactionService.Data;
 using TransactionService.Dtos;
-using TransactionService.Models;
+using TransactionAbstractions.Models;
+using TransactionAbstractions.Dtos;
+using TransactionService.Services;
+using Shared.Messages.Models;
+using Shared.Messages;
+using Microsoft.Extensions.Logging;
 
 namespace TransactionService.Controllers;
 
@@ -16,12 +19,20 @@ namespace TransactionService.Controllers;
 public class TransactionsController : ControllerBase
 {
     private readonly TransactionDbContext _context;
-    private readonly HttpClient _httpClient;
+    private readonly ITransactionService _transactionService;
+    private readonly IPublishEndpoint _publishEndpoint;
+    private readonly ILogger<TransactionsController> _logger;
 
-    public TransactionsController(TransactionDbContext context, IHttpClientFactory httpClientFactory)
+    public TransactionsController(
+        TransactionDbContext context,
+        ITransactionService transactionService,
+        IPublishEndpoint publishEndpoint,
+        ILogger<TransactionsController> logger)
     {
         _context = context;
-        _httpClient = httpClientFactory.CreateClient();
+        _transactionService = transactionService;
+        _publishEndpoint = publishEndpoint;
+        _logger = logger;
     }
 
     [HttpPost]
@@ -31,7 +42,6 @@ public class TransactionsController : ControllerBase
         if (userId == null)
             return Unauthorized("Missing user ID in token.");
 
-        // Create and save transaction
         var transaction = new TransactionRecord
         {
             Id = Guid.NewGuid(),
@@ -39,38 +49,28 @@ public class TransactionsController : ControllerBase
             ToAccountId = dto.ToAccountId,
             Amount = dto.Amount,
             Type = dto.Type,
-            Timestamp = DateTime.UtcNow
+            Timestamp = DateTime.UtcNow,
+            IsBlocked = true
         };
 
         _context.Transactions.Add(transaction);
         await _context.SaveChangesAsync();
 
-        // Step 1: Log to LedgerService
-        var ledgerEntry = new LedgerEntryDto
+        // ✅ Publish TransactionInitiatedEvent instead of TransactionCreatedEvent
+        var initiatedEvent = new TransactionInitiatedEvent
         {
             TransactionId = transaction.Id,
-            FromAccountId = transaction.FromAccountId,
-            ToAccountId = transaction.ToAccountId,
+            SenderAccountId = transaction.FromAccountId.ToString(),
+            ReceiverAccountId = transaction.ToAccountId?.ToString(),
             Amount = transaction.Amount,
-            Type = transaction.Type,
-            Status = "COMPLETED",
-            Notes = "Logged by TransactionService"
+            Timestamp = transaction.Timestamp,
+            SenderEmail = User.FindFirstValue(ClaimTypes.Email), // ✅ sender from JWT
+            ReceiverEmail = "darko@example.com" // ✅ or any test email you want
         };
 
-        var json = JsonSerializer.Serialize(ledgerEntry);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        await _publishEndpoint.Publish(initiatedEvent);
+        _logger.LogInformation("[📤 Fraud Check Triggered] Published TX {TxId} to FraudDetectionService", transaction.Id);
 
-        try
-        {
-            var response = await _httpClient.PostAsync("http://ledger-service/api/ledger", content);
-            response.EnsureSuccessStatusCode();
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Failed to log transaction to LedgerService: {ex.Message}");
-        }
-
-        // Return confirmation
         return Ok(new TransactionDto
         {
             Id = transaction.Id,
@@ -96,5 +96,16 @@ public class TransactionsController : ControllerBase
         }).ToList();
 
         return Ok(result);
+    }
+
+    [HttpPost("unblock/{id}")]
+    public async Task<IActionResult> Unblock(Guid id)
+    {
+        var result = await _transactionService.UnblockTransactionAsync(id);
+
+        if (!result)
+            return NotFound(new { message = "Transaction not found or already unblocked." });
+
+        return Ok(new { message = "Transaction successfully unblocked." });
     }
 }

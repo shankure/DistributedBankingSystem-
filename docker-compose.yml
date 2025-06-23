@@ -1,6 +1,86 @@
-version: '3.9'
-
 services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - banking-network
+
+  frauddetectionservice:
+    build:
+      context: .
+      dockerfile: FraudDetectionService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks:
+      - banking-network
+
+  ledger-service:
+    build:
+      context: .
+      dockerfile: LedgerService/Dockerfile
+    container_name: ledger-service
+    ports:
+      - "5004:80"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      ledger-postgres:
+        condition: service_started
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Jwt__Key=${JWT_SECRET}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - Jwt__Audience=${JWT_AUDIENCE}
+      - ConnectionStrings__DefaultConnection=${LEDGER_DB_CONNECTION}
+      - Services__AccountServiceUrl=${ACCOUNT_SERVICE_URL}
+    restart: on-failure
+    networks:
+      - banking-network
+
+  notificationservice:
+    build:
+      context: .
+      dockerfile: NotificationService/Dockerfile
+    ports:
+      - "5005:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Email__From=noreply@bankingsystem.com
+      - Email__SmtpServer=sandbox.smtp.mailtrap.io
+      - Email__Port=587
+      - Email__Username=0f09aa8b0aab1d
+      - Email__Password=74cd756568e0bc
+      - RabbitMQ__Host=rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks:
+      - banking-network
+
+  dashboard:
+    build:
+      context: ./Dashboard
+    ports:
+      - "5000:80"
+    restart: always
+    networks:
+      - banking-network
 
   user-service:
     build:
@@ -16,31 +96,46 @@ services:
       - Jwt__Issuer=${JWT_ISSUER}
       - Jwt__Audience=${JWT_AUDIENCE}
       - ConnectionStrings__DefaultConnection=${USER_DB_CONNECTION}
+    networks:
+      - banking-network
 
   account-service:
     build:
-      context: ./AccountService
+      context: .
+      dockerfile: AccountService/Dockerfile
     container_name: account-service
     ports:
       - "5002:80"
     depends_on:
-      - account-postgres
+      rabbitmq:
+        condition: service_healthy
+      account-postgres:
+        condition: service_started
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - Jwt__Key=${JWT_SECRET}
       - Jwt__Issuer=${JWT_ISSUER}
       - Jwt__Audience=${JWT_AUDIENCE}
       - ConnectionStrings__DefaultConnection=${ACCOUNT_DB_CONNECTION}
+    networks:
+      - banking-network
 
   transaction-service:
     build:
-      context: ./TransactionService
+      context: .
+      dockerfile: TransactionService/Dockerfile
     container_name: transaction-service
     ports:
       - "5003:80"
     depends_on:
-      - account-service
-      - ledger-service
+      rabbitmq:
+        condition: service_healthy
+      account-service:
+        condition: service_started
+      ledger-service:
+        condition: service_started
+      transaction-postgres:
+        condition: service_started
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - Jwt__Key=${JWT_SECRET}
@@ -49,24 +144,9 @@ services:
       - ConnectionStrings__DefaultConnection=${TRANSACTION_DB_CONNECTION}
       - Services__AccountServiceUrl=${ACCOUNT_SERVICE_URL}
       - Services__LedgerServiceUrl=${LEDGER_SERVICE_URL}
+    networks:
+      - banking-network
 
-  ledger-service:
-    build:
-      context: ./LedgerService
-    container_name: ledger-service
-    ports:
-      - "5004:80"
-    depends_on:
-      - ledger-postgres
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - Jwt__Key=${JWT_SECRET}
-      - Jwt__Issuer=${JWT_ISSUER}
-      - Jwt__Audience=${JWT_AUDIENCE}
-      - ConnectionStrings__DefaultConnection=${LEDGER_DB_CONNECTION}
-      - Services__AccountServiceUrl=${ACCOUNT_SERVICE_URL}
-
-  # PostgreSQL for UserService
   user-postgres:
     image: postgres
     container_name: user-postgres
@@ -78,8 +158,9 @@ services:
       - "5433:5432"
     volumes:
       - user_pgdata:/var/lib/postgresql/data
+    networks:
+      - banking-network
 
-  # PostgreSQL for AccountService
   account-postgres:
     image: postgres
     container_name: account-postgres
@@ -91,8 +172,9 @@ services:
       - "5434:5432"
     volumes:
       - account_pgdata:/var/lib/postgresql/data
+    networks:
+      - banking-network
 
-  # PostgreSQL for LedgerService
   ledger-postgres:
     image: postgres
     container_name: ledger-postgres
@@ -104,8 +186,9 @@ services:
       - "5435:5432"
     volumes:
       - ledger_pgdata:/var/lib/postgresql/data
+    networks:
+      - banking-network
 
-  # PostGreSQL for TransactionService
   transaction-postgres:
     image: postgres
     container_name: transaction-postgres
@@ -117,9 +200,14 @@ services:
       - "5436:5432"
     volumes:
       - transaction_pgdata:/var/lib/postgresql/data
+    networks:
+      - banking-network
 
 volumes:
   user_pgdata:
   account_pgdata:
   ledger_pgdata:
   transaction_pgdata:
+
+networks:
+  banking-network:

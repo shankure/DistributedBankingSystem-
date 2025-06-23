@@ -10,13 +10,14 @@
         "projectUniqueName": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\UserService\\UserService.csproj",
         "projectName": "UserService",
         "projectPath": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\UserService\\UserService.csproj",
-        "packagesPath": "C:\\Users\\darko\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\.nuget\\packages",
         "outputPath": "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\UserService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+          "C:\\Users\\darko\\Desktop\\Distributed Systems\\DistributedBankingSystem\\NuGet.Config",
           "C:\\Users\\darko\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -43,8 +44,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -53,6 +53,14 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.2, )"
+            },
+            "MassTransit": {
+              "target": "Package",
+              "version": "[8.4.1, )"
+            },
+            "MassTransit.RabbitMQ": {
+              "target": "Package",
+              "version": "[8.4.1, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -112,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.410/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
