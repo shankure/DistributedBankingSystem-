@@ -59,6 +59,12 @@ builder.Services.AddMassTransit(x =>
 });
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<LedgerDbContext>();
+    dbContext.Database.Migrate();
+}
+
 // === Middleware Pipeline ===
 if (app.Environment.IsDevelopment())
 {

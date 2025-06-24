@@ -147,6 +147,12 @@ builder.WebHost.ConfigureKestrel(options =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<TransactionDbContext>();
+    dbContext.Database.Migrate();
+}
+
 // === Middleware Pipeline ===
 if (app.Environment.IsDevelopment())
 {

@@ -47,7 +47,14 @@ builder.WebHost.ConfigureKestrel(options =>
     options.ListenAnyIP(80);
 });
 
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<UserDbContext>();
+    dbContext.Database.Migrate();
+}
 
 if (app.Environment.IsDevelopment())
 {
