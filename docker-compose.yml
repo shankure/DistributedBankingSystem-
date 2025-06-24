@@ -63,8 +63,8 @@ services:
       - Email__From=noreply@bankingsystem.com
       - Email__SmtpServer=sandbox.smtp.mailtrap.io
       - Email__Port=587
-      - Email__Username=0f09aa8b0aab1d
-      - Email__Password=74cd756568e0bc
+      - Email__Username=0fb6a52871a174
+      - Email__Password=b5499c5fd58e54
       - RabbitMQ__Host=rabbitmq
     depends_on:
       rabbitmq:
