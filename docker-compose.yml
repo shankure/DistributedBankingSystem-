@@ -66,6 +66,7 @@ services:
       - Email__Username=0fb6a52871a174
       - Email__Password=b5499c5fd58e54
       - RabbitMQ__Host=rabbitmq
+      - BaseUrl=http://72.146.176.49:5003
     depends_on:
       rabbitmq:
         condition: service_healthy
