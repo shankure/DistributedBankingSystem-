@@ -37,7 +37,7 @@ namespace NotificationService.Services
                     SecureSocketOptions.StartTls
                 );
 
-                // ✅ Fix for GSSAPI/XOAUTH2 issue seen in your logs
+                // Fix for GSSAPI/XOAUTH2 issue
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
                 client.AuthenticationMechanisms.Remove("GSSAPI");
 

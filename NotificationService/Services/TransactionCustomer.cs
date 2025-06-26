@@ -81,7 +81,7 @@ namespace NotificationService.Services
                     var subject = $"Transaction Alert: ${transaction.Amount} Sent";
                     var message = $"You sent ${transaction.Amount} to {transaction.ReceiverAccountId} on {transaction.Timestamp}.";
 
-                    // Add HTML version for improved formatting
+                    // Added HTML version for improved formatting
                     var htmlMessage = $"<p>{message}</p>";
 
                     await emailSender.SendEmailAsync(transaction.SenderAccountId, subject, message, htmlMessage);
